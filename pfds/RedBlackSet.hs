@@ -30,4 +30,4 @@ insert x s = T B a y b
 
 
 fromOrdList :: Ord a => [a] -> RedBlackSet a
-fromOrdList xs = foldr (insert) empty xs
+fromOrdList xs = foldr insert empty xs
