@@ -1,6 +1,4 @@
 module RedBlackSet(RedBlackSet) where
-import System
-import Time
 
 data Color = R | B deriving Show
 data RedBlackSet a = E | T Color (RedBlackSet a) a (RedBlackSet a) deriving Show
@@ -20,7 +18,8 @@ bottom_up = linkAll.foldr add []
         link l (One a t) = T B l a t
         link l (Two a1 t1 a2 t2) = T B (T R l a1 t1) a2 t2
 
-
+fromOrdList :: Ord a => [a] -> RedBlackSet a
+fromOrdList = bottom_up
 
 balance B (T R (T R a x b) y c) z d = T R (T B a x b) y (T B c z d)
 balance B (T R a x (T R b y c)) z d = T R (T B a x b) y (T B c z d)
@@ -47,8 +46,9 @@ insert s x = T B a y b
                              else s
         T _ a y b = ins s
                               
-fromOrdList :: Ord a => [a] -> RedBlackSet a
-fromOrdList xs = foldl' insert empty xs
+
+fromOrdList_foldl' :: Ord a => [a] -> RedBlackSet a
+fromOrdList_foldl' xs = foldl' insert empty xs
 
 foldl' :: (a -> b -> a) -> a -> [b] -> a
 foldl' f z [] = z
