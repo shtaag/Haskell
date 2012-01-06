@@ -1,6 +1,7 @@
 import Graphics.UI.GLUT
 import Bindings
 import Data.IORef
+import Display
 
 -- myPoints :: [(GLfloat, GLfloat, GLfloat)]
 -- myPoints = map (\k -> (sin(2*pi*k/12), cos(2*pi*k/12), 0.0)) [1..12]
