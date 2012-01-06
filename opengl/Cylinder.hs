@@ -1,41 +1,37 @@
 module Cylinder where
 
-import Graphics.UI.GLUT hiding (rect)
+import Graphics.UI.GLUT
 import Points
 import Cube
 import Rect
-import Data.IORef
 
 data CylinderInfo =
   CylinderInfo {
-    wid :: Float,
-    hei :: Float,
+    wid :: Int,
+    hei :: Int,
     delta :: Float,
     num_dots :: Int,
-    dot_size :: Int,
-    dot_color :: Color3 GLdouble
+    dot_size :: Float,
+    dot_color :: Color3 GLfloat
   }
 
 draw info angle = do 
   clear [ColorBuffer]
   loadIdentity
-  -- (x,y,z) <- get position
-  -- translate $ Vector3 x y z
-  -- preservingMatrix $
-  --   do 
   scale 0.001 0.001 (0.001::GLfloat)
   mapM_ (\(x,y,z) -> preservingMatrix $ do 
             matrixMode $= Modelview 0
             translate $ Vector3 x y z
-            color $ Color3 0.2 0.2 (0.4::GLfloat)
-              
+            color $ dot_color info
+            
             -- rotate the world
             matrixMode $= Projection
             a <- get angle
-            rotate a $ Vector3 0 (0.5::GLfloat) 0
-            cube (5.0::GLfloat)
-            loadIdentity
-        ) $ cylpoints 500 400 150
+            rotate a $ Vector3 0.0 (1.0::GLfloat) 0.0
+            
+            cube ((realToFrac $ dot_size info)::GLfloat)
+            loadIdentity -- necessary to calc each cube
+        ) $ cylpoints (wid info) (hei info) (num_dots info)
   swapBuffers
      
 idle angle delta = do 

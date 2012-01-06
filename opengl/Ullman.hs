@@ -1,5 +1,3 @@
-module Ullman where
-
 import Graphics.UI.GLUT
 import Bindings
 import Cylinder
@@ -21,7 +19,7 @@ window1 = WindowInfo {
 cylinder1 :: CylinderInfo
 cylinder1 = 
   CylinderInfo { 
-    wid = 300, hei = 200, delta = 0.5, num_dots = 1, dot_size = 3, dot_color = Color3 0 1.0 0.2
+    wid = 500, hei = 600, delta = 0.5, num_dots = 150, dot_size = 5.0, dot_color = Color3 0.2 0.1 0.9
     }
   
 main :: IO()
@@ -31,13 +29,12 @@ main =
      initialWindowSize $= Size (fromIntegral $ wwid window1) (fromIntegral $ whei window1)
      initialWindowPosition $= Position (fromIntegral $ wpos_x window1) (fromIntegral $ wpos_y window1)
      initialDisplayMode $= [DoubleBuffered, RGBMode]
-          
+     
      createWindow "UllmanCylinder"
-     reshapeCallback $= Just reshapeWindow    
+     reshapeCallback $= Just reshapeWindow -- omissible
      
      angle <- newIORef (0.0::GLfloat)
      delta <- newIORef (realToFrac $ delta cylinder1)
-     
      idleCallback $= Just (idle angle delta)
      
      displayCallback $= draw cylinder1 angle
