@@ -4,6 +4,7 @@ import Cube
 import Data.IORef
 import Points
 
+-- example from OpenGLtutorial2
 display angle position = 
   do clear [ColorBuffer]
      loadIdentity

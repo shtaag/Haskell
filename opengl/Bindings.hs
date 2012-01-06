@@ -36,5 +36,6 @@ keyboardAct a p (SpecialKey KeyDown) Down =
 
 keyboardAct _ _ _ _ = return()
 
+-- example from OpenGLtutrial2
 keyboardMouse angle pos key state modifiers position = 
   do keyboardAct angle pos key state

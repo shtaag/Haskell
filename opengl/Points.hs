@@ -1,13 +1,14 @@
 module Points where
+
 import Graphics.Rendering.OpenGL
 import System.Random
 import Data.Time
-import Control.Applicative
 
+-- default example
 points :: Int -> [(GLfloat, GLfloat, GLfloat)]
 points n' = let n = fromIntegral n' in map (\k -> let t = 2*pi*k/n in (sin(t), cos(t), 0.0)) [1..n]
 
--- here the width means radius
+-- the width means radius
 cylpoints :: Int -> Int -> Int -> [(GLfloat, GLfloat, GLfloat)]
 cylpoints width height n' = 
   let n = fromIntegral n'
@@ -37,7 +38,6 @@ randomPNSeq seed = map posneg (randomSeq 10000 seed)
 randNArray :: Int -> Int -> Int -> [Float]
 randNArray r n seed = take n $ map fromIntegral (randomSeq r seed)
 
--- z randomly becomes negative
 calcZ :: Float -> Int -> Float
 -- incaseof failure???
 calcZ x width' =  (sqrt (1 - (x^2) / (width^2))) * width
