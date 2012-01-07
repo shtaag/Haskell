@@ -25,7 +25,7 @@ cylinder1 =
 main :: IO()
 main =
   do getArgsAndInitialize
-     
+     -- windowの初期設定
      initialWindowSize $= Size (fromIntegral $ wwid window1) (fromIntegral $ whei window1)
      initialWindowPosition $= Position (fromIntegral $ wpos_x window1) (fromIntegral $ wpos_y window1)
      initialDisplayMode $= [DoubleBuffered, RGBMode]
@@ -35,8 +35,9 @@ main =
      
      angle <- newIORef (0.0::GLfloat)
      delta <- newIORef (realToFrac $ delta cylinder1)
+     -- angleの更新
      idleCallback $= Just (idle angle delta)
-     
+     -- cylinder描画
      displayCallback $= draw cylinder1 angle
      
      mainLoop

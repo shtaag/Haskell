@@ -3,7 +3,6 @@ module Cylinder where
 import Graphics.UI.GLUT
 import Points
 import Cube
-import Rect
 
 data CylinderInfo =
   CylinderInfo {
@@ -18,6 +17,7 @@ data CylinderInfo =
 draw info angle = do 
   clear [ColorBuffer]
   loadIdentity
+  -- 描画倍率の指定
   scale 0.001 0.001 (0.001::GLfloat)
   mapM_ (\(x,y,z) -> preservingMatrix $ do 
             matrixMode $= Modelview 0
@@ -39,3 +39,4 @@ idle angle delta = do
   d <- get delta
   angle $=! (a+d)
   postRedisplay Nothing
+  
