@@ -1,3 +1,5 @@
+module Main where
+
 import Graphics.UI.GLUT
 import Bindings
 import Cylinder
